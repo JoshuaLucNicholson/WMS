@@ -14,6 +14,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WareHouse_Manager.pages;
 using MySql.Data.MySqlClient;
+
+
+using Spire.Doc;
+using System.Windows.Forms;
+using System.Drawing.Printing;
+using PrintDialog = System.Windows.Forms.PrintDialog;
+
 namespace WareHouse_Manager
 {
     /// <summary>
@@ -24,7 +31,7 @@ namespace WareHouse_Manager
         public MainWindow()
         {
             InitializeComponent();
-            //Main.Content = new StockList();
+
         }
 
         private void BtnClickStockList(object sender, RoutedEventArgs e)

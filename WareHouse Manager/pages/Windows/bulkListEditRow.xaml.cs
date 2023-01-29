@@ -12,12 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using System.Printing;
-using System.Reflection.Metadata;
-using Word = Microsoft.Office.Interop.Word;
-using Microsoft.Office.Interop.Word;
-using Document = Microsoft.Office.Interop.Word.Document;
-using Window = System.Windows.Window;
+
+
+using Spire.Doc;
+using System.Windows.Forms;
+using System.Drawing.Printing;
+using PrintDialog = System.Windows.Forms.PrintDialog;
 
 namespace WareHouse_Manager.pages.Windows
 {
@@ -26,10 +26,14 @@ namespace WareHouse_Manager.pages.Windows
     /// </summary>
     public partial class bulkListEditRow : Window
     {
-
+       
         public bulkListEditRow(string ID, string description, string qty, string location)
         {
             InitializeComponent();
+            Stock_Id_Value.Text = ID;
+            Description_Value.Text = description;
+            Location_Value.Text = location;
+            Qty_Value.Text = qty.ToString();
         }
 
         private void UpdateBulk_Click(object sender, RoutedEventArgs e)
@@ -37,54 +41,28 @@ namespace WareHouse_Manager.pages.Windows
 
         }
 
+
         private void print_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Office.Interop.Word.Application wordApp = null;
-            wordApp = new Microsoft.Office.Interop.Word.Application();
-            wordApp.Visible = true;
+            // Test File Location
+            string filePath = "C:\\Users\\Joshu\\Documents\\ExampleDocument.docx";
+            // Create a new document and load the input file
+            Document doc = new Document();
+            doc.LoadFromFile(filePath);
 
-            Document wordDoc = wordApp.Documents.Open(@"C:\Users\Joshu\Desktop\WareHouseManagmentSoftware");
-            Bookmark bkm = wordDoc.Bookmarks["StockID"];
-            Microsoft.Office.Interop.Word.Range rng = bkm.Range;
-            rng.Text = "Adams Laura"; //Get value from any where 
+            // Replace all occurrences of the original word with the new word
+            doc.Replace("StockId", Stock_Id_Value.Text, true, true);
+            doc.Replace("Description", Description_Value.Text, true, true);
+            doc.Replace("Qty", Location_Value.Text, true, true);
+            doc.Replace("Location", Qty_Value.Text, true, true);
+
+            PrintDocument printDoc = doc.PrintDocument;
+            //Background printing  
+            printDoc.Print();
+            //Close window after printing
+            Close();
         }
 
-/*        public void Print()
-        {
-            // Create a PrintDialog  
-            PrintDialog printDlg = new PrintDialog();
-            // Create a FlowDocument dynamically.  
-            FlowDocument doc = CreateFlowDocument();
-            doc.Name = "FlowDoc";
-            // Create IDocumentPaginatorSource from FlowDocument  
-            IDocumentPaginatorSource idpSource = doc;
-            // Call PrintDocument method to send document to printer  
-            printDlg.PrintDocument(idpSource.DocumentPaginator, "Hello WPF Printing.");
-        }
-
-        private FlowDocument CreateFlowDocument()
-        {
-            // Create a FlowDocument  
-            FlowDocument doc = new FlowDocument();
-            // Create a Section  
-            Section sec = new Section();
-            // Create first Paragraph  
-            Paragraph p1 = new Paragraph();
-            // Create and add a new Bold, Italic and Underline  
-            Bold bld = new Bold();
-            bld.Inlines.Add(new Run("First Paragraph"));
-            Italic italicBld = new Italic();
-            italicBld.Inlines.Add(bld);
-            Underline underlineItalicBld = new Underline();
-            underlineItalicBld.Inlines.Add(italicBld);
-            // Add Bold, Italic, Underline to Paragraph  
-            p1.Inlines.Add(underlineItalicBld);
-            // Add Paragraph to Section  
-            sec.Blocks.Add(p1);
-            // Add Section to FlowDocument  
-            doc.Blocks.Add(sec);
-            return doc;
-        }*/
         private void cancel_click(object sender, RoutedEventArgs e)
         {
             this.Close();

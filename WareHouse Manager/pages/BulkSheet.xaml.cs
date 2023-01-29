@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WareHouse_Manager.pages.Windows;
 
+
 namespace WareHouse_Manager.pages
 {
     /// <summary>
@@ -47,12 +48,14 @@ namespace WareHouse_Manager.pages
         }
         private void uxDeclaration_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DataRowView row = (DataRowView)bulkDataTable.SelectedItems[0];
-            string stockId = row[0].ToString();
-            string stockDesc = row[1].ToString();
-            string stockqty = row[2].ToString();
-            string stockLocation = row[3].ToString();
-            bulkListEditRow secondWin = new bulkListEditRow(stockId, stockDesc, stockqty, stockLocation); secondWin.ShowDialog();
+             DataRowView row = (DataRowView)bulkDataTable.SelectedItems[0];
+             string stockId = row[0].ToString();
+             string stockDesc = row[1].ToString();
+             string stockqty = row[2].ToString();
+             string stockLocation = row[3].ToString();
+             bulkListEditRow secondWin = new bulkListEditRow(stockId, stockDesc, stockqty, stockLocation); 
+             secondWin.ShowDialog();
+
         }
     }
 }
