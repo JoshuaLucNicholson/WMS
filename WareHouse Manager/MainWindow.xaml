@@ -1,0 +1,17 @@
+﻿<Window x:Class="WareHouse_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WareHouse_Manager"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1980">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Height="157" VerticalAlignment="Top" Margin="512,5,512,0">
+            <Button Content = "Stock List" MinWidth="100" Click="BtnClickStockList" Margin="10" Height="125" Width="300" FontSize="50"/>
+            <Button Content = "Bulk Sheet" MinWidth="100" Click="BtnClickBulkSheet" Margin="10" Height="125" Width="300" FontSize="50"/>
+            <Button Content = "Orders" MinWidth="100" Height="125" Width="300" FontSize="50"/>
+        </StackPanel>
+        <Frame x:Name="Main" Margin="0,162,0,0" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
