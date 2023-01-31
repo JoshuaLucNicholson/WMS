@@ -17,6 +17,7 @@ namespace WareHouse_Manager.pages.Windows
     /// <summary>
     /// Interaction logic for OrderScan.xaml
     /// </summary>
+    /// //test
     public partial class OrderScan : Window
     {
         public OrderScan()

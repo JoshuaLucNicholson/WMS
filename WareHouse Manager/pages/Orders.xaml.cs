@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,45 +13,55 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 using WareHouse_Manager.pages.Windows;
-
+using Google.Protobuf.WellKnownTypes;
+using System.Xml.Linq;
 
 namespace WareHouse_Manager.pages
 {
     /// <summary>
-    /// Interaction logic for BulkSheet.xaml
+    /// Interaction logic for Orders.xaml
     /// </summary>
-    public partial class BulkSheet : Page
+    public partial class Orders : Page
     {
-        public BulkSheet()
+        public Orders()
         {
             InitializeComponent();
-            bulkDataTable.ItemsSource = null;
+
             string connstring = "server=localhost; uid=root;pwd=password123;database=WareHouse";
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = connstring;
-            con.Open(); 
-            string sql = "SELECT x.itemId, y.description, x.location , x.quantity FROM bulklocations x join stockdata y on x.itemId = y.ItemId;";
+            con.Open();
+            string sql = "select orderID, customer, `lines` , status, date(date) as date from orders";
             MySqlCommand cmd = new MySqlCommand(sql, con);
             MySqlDataReader reader = cmd.ExecuteReader();
             DataTable table = new DataTable();
             table.Load(reader);
-            bulkDataTable.ItemsSource = table.DefaultView;
+
+
+            string result = "0";
+            foreach (DataRow row in table.Rows)
+            { 
+                string linecountSQL = "select count(itemid) from orderlines where orderid = " + row["orderID"].ToString();
+                MySqlCommand lineCountcmd = new MySqlCommand(linecountSQL, con);
+                result = Convert.ToString(lineCountcmd.ExecuteScalar());
+
+                row["Lines"] = result;
+                result = "0";
+            }
+
+            
+
+            orders.ItemsSource = table.DefaultView;
             con.Close();
-
-
         }
 
         private void uxDeclaration_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-             DataRowView row = (DataRowView)bulkDataTable.SelectedItems[0];
-             string stockId = row[0].ToString();
-             string stockDesc = row[1].ToString();
-             string stockqty = row[2].ToString();
-             string stockLocation = row[3].ToString();
-             bulkListEditRow secondWin = new bulkListEditRow(stockId, stockDesc, stockqty, stockLocation); 
-             secondWin.ShowDialog();
-
+            
         }
+
+
     }
 }

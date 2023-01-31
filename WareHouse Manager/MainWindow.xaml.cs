@@ -42,8 +42,11 @@ namespace WareHouse_Manager
         private void BtnClickBulkSheet(object sender, RoutedEventArgs e)
         {
             Main.Content = new BulkSheet();
-            
+        }
 
+        private void BtnClickOrdersSheet(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Orders();
         }
     }
 }

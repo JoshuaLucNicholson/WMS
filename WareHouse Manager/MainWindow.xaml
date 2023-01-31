@@ -10,7 +10,7 @@
         <StackPanel Orientation="Horizontal" Height="157" VerticalAlignment="Top" Margin="512,5,512,0">
             <Button Content = "Stock List" MinWidth="100" Click="BtnClickStockList" Margin="10" Height="125" Width="300" FontSize="50"/>
             <Button Content = "Bulk Sheet" MinWidth="100" Click="BtnClickBulkSheet" Margin="10" Height="125" Width="300" FontSize="50"/>
-            <Button Content = "Orders" MinWidth="100" Height="125" Width="300" FontSize="50"/>
+            <Button Content = "Orders" MinWidth="100" Height="125" Width="300" FontSize="50" Click="BtnClickOrdersSheet"/>
         </StackPanel>
         <Frame x:Name="Main" Margin="0,162,0,0" NavigationUIVisibility="Hidden"/>
     </Grid>
