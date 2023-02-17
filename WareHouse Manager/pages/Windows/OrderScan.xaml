@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="OrderScan" Height="1080" Width="1920">
     <Grid>
-        
+        <DataGrid x:OrderItemsDataTable
+        AutoGenerateColumns="False"
+            IsReadOnly="True"
+            MouseDoubleClick="uxDeclaration_MouseDoubleClick"
+            SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
+            HeadersVisibility="Column"
+            HorizontalAlignment="Center"
+            FontSize="40"
+            Width="1700">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Item Id" Binding="{Binding ItemId}" Width=".20*"/>
+            <DataGridTextColumn Header="Description" Binding="{Binding description}" Width=".50*"/>
+            <DataGridTextColumn Header="Location" Binding="{Binding location}" Width=".15*"/>
+            <DataGridTextColumn Header="Quantity" Binding="{Binding qty}" Width=".15*"/>
+        </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

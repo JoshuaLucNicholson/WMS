@@ -11,7 +11,7 @@
     <Grid>
 
         <DataGrid x:Name="stockDataTable" 
-              AutoGenerateColumns="False"
+            AutoGenerateColumns="False"
             IsReadOnly="True"
             MouseDoubleClick="uxDeclaration_MouseDoubleClick"
             SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
